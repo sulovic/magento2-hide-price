@@ -7,4 +7,14 @@
                 type="Shoppy\HidePrice\Plugin\HidePricePlugin"/>
     </type>
 
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="shoppy_hideprice_saleable_plugin"
+                type="Shoppy\HidePrice\Plugin\SaleablePlugin"/>
+    </type>
+
+    <type name="Magento\Checkout\Controller\Cart\Add">
+        <plugin name="shoppy_hideprice_addtocart_plugin"
+                type="Shoppy\HidePrice\Plugin\AddToCartPlugin"/>
+    </type>
+
 </config>

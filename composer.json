@@ -12,10 +12,10 @@
   },
   "autoload": {
     "files": [
-      "app/code/Shoppy/HidePrice/registration.php"
+      "registration.php"
     ],
     "psr-4": {
-      "Shoppy\\HidePrice\\": "app/code/Shoppy/HidePrice/"
+      "Shoppy\\HidePrice\\": ""
     }
   }
 }

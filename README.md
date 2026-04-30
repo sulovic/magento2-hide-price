@@ -1,4 +1,4 @@
-# Magento 2 Hide Price (B2B)
+# Magento 2 Hide Price
 
 Hide product prices for non-logged-in users in Magento 2.
 
@@ -54,10 +54,16 @@ Go to:
 Stores → Configuration → Hide Price
 ```
 
+Select store/scope
+
+```
+
 Enable:
 
 ```
+
 Yes
+
 ```
 
 ---
@@ -67,7 +73,9 @@ Yes
 The module uses a plugin on:
 
 ```
+
 Magento\Catalog\Pricing\Render\FinalPriceBox::toHtml
+
 ```
 
 - Guests → "Pozovi za cenu"
@@ -76,7 +84,9 @@ Magento\Catalog\Pricing\Render\FinalPriceBox::toHtml
 The module is cache-aware and uses:
 
 ```
+
 Magento\Framework\App\Http\Context
+
 ```
 
 ---
@@ -85,7 +95,7 @@ Magento\Framework\App\Http\Context
 
 Ideal for:
 
-- B2B stores
+- B2B store
 - Price-on-request catalogs
 - Restricted pricing models
 
@@ -102,3 +112,4 @@ Ideal for:
 ## License
 
 MIT
+```

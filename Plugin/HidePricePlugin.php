@@ -1,42 +1,56 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Shoppy\HidePrice\Plugin;
 
-use Magento\Customer\Model\Session;
+use Magento\Catalog\Pricing\Render\FinalPriceBox;
+use Magento\Customer\Model\Context as CustomerContext;
 use Magento\Framework\App\Config\ScopeConfigInterface;
+use Magento\Framework\App\Http\Context as HttpContext;
 use Magento\Store\Model\ScopeInterface;
 
 class HidePricePlugin
 {
-    private $customerSession;
-    private $scopeConfig;
+    private HttpContext $httpContext;
+    private ScopeConfigInterface $scopeConfig;
 
     public function __construct(
-        Session $customerSession,
-        ScopeConfigInterface $scopeConfig
+        HttpContext $httpContext,
+        ScopeConfigInterface $scopeConfig,
     ) {
-        $this->customerSession = $customerSession;
+        $this->httpContext = $httpContext;
         $this->scopeConfig = $scopeConfig;
     }
 
-    public function aroundToHtml($subject, callable $proceed)
+    public function aroundToHtml(
+        FinalPriceBox $subject,
+        callable $proceed,
+    ): string {
+        if (!$this->isEnabled((int) $subject->getStore()->getId())) {
+            return $proceed();
+        }
+
+        if ($this->isLoggedIn()) {
+            return $proceed();
+        }
+
+        return '<span class="shoppy-hide-price-msg">Pozovi za cenu</span>';
+    }
+
+    private function isLoggedIn(): bool
     {
-        // proveri da li je modul uključen za trenutni store
-        $enabled = $this->scopeConfig->isSetFlag(
-            'shoppy_hideprice/general/enabled',
-            ScopeInterface::SCOPE_STORE
+        return (bool) $this->httpContext->getValue(
+            CustomerContext::CONTEXT_AUTH,
         );
+    }
 
-        if (!$enabled) {
-            return $proceed();
-        }
-
-        // ako je user ulogovan → normalna cena
-        if ($this->customerSession->isLoggedIn()) {
-            return $proceed();
-        }
-
-        // guest → custom tekst
-        return '<span class="hide-price-msg">Pozovi za cenu</span>';
+    private function isEnabled(int $storeId): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            "shoppy_hideprice/general/enabled",
+            ScopeInterface::SCOPE_STORE,
+            $storeId,
+        );
     }
 }
