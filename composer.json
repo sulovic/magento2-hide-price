@@ -1,0 +1,21 @@
+{
+  "name": "shoppy/magento2-hide-price",
+  "author": "Vladimir Sulovic",
+  "homepage": "https://github.com/sulovic/magento2-hide-price",
+  "description": "Hide product prices for guest users (B2B) in Magento 2",
+  "type": "magento2-module",
+  "version": "1.0.0",
+  "license": "MIT",
+  "require": {
+    "php": "^8.1 || ^8.2 || ^8.3",
+    "magento/framework": "^103.0 || ^104.0"
+  },
+  "autoload": {
+    "files": [
+      "app/code/Shoppy/HidePrice/registration.php"
+    ],
+    "psr-4": {
+      "Shoppy\\HidePrice\\": "app/code/Shoppy/HidePrice/"
+    }
+  }
+}
