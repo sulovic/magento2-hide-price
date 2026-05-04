@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Shoppy\Magento2HidePrice\Plugin;
 
-use Magento\Checkout\Controller\Cart\Add;
-use Magento\Framework\Exception\LocalizedException;
+use Magento\Catalog\Block\Product\View\AddToCart;
 use Shoppy\Magento2HidePrice\Helper\HidePriceHelper;
 
-class AddToCartPlugin
+class HideAddToCartPlugin
 {
     private HidePriceHelper $hidePriceHelper;
 
@@ -17,12 +16,10 @@ class AddToCartPlugin
         $this->hidePriceHelper = $hidePriceHelper;
     }
 
-    public function aroundExecute(Add $subject, callable $proceed)
+    public function aroundToHtml(AddToCart $subject, callable $proceed): string
     {
-        if ($this->hidePriceHelper->isGuestRestricted()) {
-            throw new LocalizedException(
-                __("Morate biti ulogovani da biste kupili."),
-            );
+        if ($this->hidePriceHelper->shouldHideAddToCart()) {
+            return "";
         }
 
         return $proceed();

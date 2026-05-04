@@ -22,13 +22,13 @@ Hide product prices for non-logged-in users in Magento 2.
 1. Copy module to:
 
 ```
-app/code/Shoppy/HidePrice
+app/code/Shoppy/magento2-hide-price
 ```
 
 2. Run:
 
 ```
-php bin/magento module:enable Shoppy_HidePrice
+php bin/magento module:enable Shoppy_Magento2HidePrice
 php bin/magento setup:upgrade
 php bin/magento cache:flush
 ```
@@ -39,7 +39,7 @@ php bin/magento cache:flush
 
 ```
 composer require shoppy/magento2-hide-price
-php bin/magento module:enable Shoppy_HidePrice
+php bin/magento module:enable Shoppy_Magento2HidePrice
 php bin/magento setup:upgrade
 php bin/magento cache:flush
 ```

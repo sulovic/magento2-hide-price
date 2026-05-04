@@ -4,17 +4,17 @@
 
     <type name="Magento\Catalog\Pricing\Render\FinalPriceBox">
         <plugin name="shoppy_hideprice_plugin"
-                type="Shoppy\HidePrice\Plugin\HidePricePlugin"/>
+                type="Shoppy\Magento2HidePrice\Plugin\HidePricePlugin"/>
     </type>
 
-    <type name="Magento\Catalog\Model\Product">
-        <plugin name="shoppy_hideprice_saleable_plugin"
-                type="Shoppy\HidePrice\Plugin\SaleablePlugin"/>
+    <type name="Magento\Catalog\Block\Product\View\AddToCart">
+        <plugin name="shoppy_hideprice_hideaddtocart_plugin"
+                type="Shoppy\Magento2HidePrice\Plugin\HideAddToCartPlugin"/>
     </type>
 
     <type name="Magento\Checkout\Controller\Cart\Add">
         <plugin name="shoppy_hideprice_addtocart_plugin"
-                type="Shoppy\HidePrice\Plugin\AddToCartPlugin"/>
+                type="Shoppy\Magento2HidePrice\Plugin\AddToCartPlugin"/>
     </type>
 
 </config>
