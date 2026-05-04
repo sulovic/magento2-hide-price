@@ -18,7 +18,7 @@ class AddToCartPlugin
 
     public function __construct(
         HttpContext $httpContext,
-        ScopeConfigInterface $scopeConfig
+        ScopeConfigInterface $scopeConfig,
     ) {
         $this->httpContext = $httpContext;
         $this->scopeConfig = $scopeConfig;
@@ -27,8 +27,8 @@ class AddToCartPlugin
     public function aroundExecute(Add $subject, callable $proceed)
     {
         $enabled = $this->scopeConfig->isSetFlag(
-            'shoppy_hideprice/general/enabled',
-            ScopeInterface::SCOPE_STORE
+            "shoppy_hideprice/general/enabled",
+            ScopeInterface::SCOPE_STORE,
         );
 
         if (!$enabled) {
@@ -37,7 +37,7 @@ class AddToCartPlugin
 
         if (!$this->isLoggedIn()) {
             throw new LocalizedException(
-                __('Morate biti ulogovani da biste kupili.')
+                __("Morate biti ulogovani da biste kupili."),
             );
         }
 
@@ -47,7 +47,7 @@ class AddToCartPlugin
     private function isLoggedIn(): bool
     {
         return (bool) $this->httpContext->getValue(
-            CustomerContext::CONTEXT_AUTH
+            CustomerContext::CONTEXT_AUTH,
         );
     }
-}   
+}
