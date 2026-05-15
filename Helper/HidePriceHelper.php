@@ -12,19 +12,11 @@ use Magento\Store\Model\StoreManagerInterface;
 
 class HidePriceHelper
 {
-    private HttpContext $httpContext;
-    private ScopeConfigInterface $scopeConfig;
-    private StoreManagerInterface $storeManager;
-
     public function __construct(
-        HttpContext $httpContext,
-        ScopeConfigInterface $scopeConfig,
-        StoreManagerInterface $storeManager,
-    ) {
-        $this->httpContext = $httpContext;
-        $this->scopeConfig = $scopeConfig;
-        $this->storeManager = $storeManager;
-    }
+        private HttpContext $httpContext,
+        private ScopeConfigInterface $scopeConfig,
+        private StoreManagerInterface $storeManager,
+    ) {}
 
     public function isEnabled(): bool
     {
@@ -50,11 +42,6 @@ class HidePriceHelper
     }
 
     public function shouldHidePrice(): bool
-    {
-        return $this->isGuestRestricted();
-    }
-
-    public function shouldHideAddToCart(): bool
     {
         return $this->isGuestRestricted();
     }

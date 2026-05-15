@@ -7,9 +7,9 @@
                 type="Shoppy\Magento2HidePrice\Plugin\HidePricePlugin"/>
     </type>
 
-    <type name="Magento\Catalog\Block\Product\View\AddToCart">
-        <plugin name="shoppy_hideprice_hideaddtocart_plugin"
-                type="Shoppy\Magento2HidePrice\Plugin\HideAddToCartPlugin"/>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="shoppy_hideprice_product_saleable_plugin"
+                type="Shoppy\Magento2HidePrice\Plugin\ProductPlugin"/>
     </type>
 
     <type name="Magento\Checkout\Controller\Cart\Add">

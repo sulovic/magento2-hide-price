@@ -9,19 +9,16 @@ use Shoppy\Magento2HidePrice\Helper\HidePriceHelper;
 
 class HidePricePlugin
 {
-    private HidePriceHelper $hidePriceHelper;
-
-    public function __construct(HidePriceHelper $hidePriceHelper)
-    {
-        $this->hidePriceHelper = $hidePriceHelper;
-    }
+    public function __construct(private HidePriceHelper $hidePriceHelper) {}
 
     public function aroundToHtml(
         FinalPriceBox $subject,
         callable $proceed,
     ): string {
         if ($this->hidePriceHelper->shouldHidePrice()) {
-            return '<span class="shoppy-hide-price-msg">Pozovi za cenu</span>';
+            return '<span class="price shoppy-hide-price-msg">' .
+                __("Pozovi za cenu") .
+                "</span>";
         }
 
         return $proceed();
